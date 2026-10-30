@@ -24,6 +24,7 @@ jobs:
           docker cp "$GITHUB_WORKSPACE/." "$backend:/tmp/tutor-core-source"
           docker exec "$backend" bash -c 'cd /home/frappe/frappe-bench && bench get-app --branch version-16 https://github.com/frappe/education && cp -R /tmp/tutor-core-source apps/tutor_core && ./env/bin/pip install -e apps/tutor_core && echo >> sites/apps.txt && echo tutor_core >> sites/apps.txt && bench --site frontend install-app education && bench --site frontend install-app tutor_core && bench --site frontend list-apps'
           docker restart "$backend"
+          docker compose -f /tmp/frappe-pwd.yml restart frontend
       - name: Run application integration checks
         run: |
           docker exec "$(docker compose -f /tmp/frappe-pwd.yml ps -q backend)" bash -c 'cd /home/frappe/frappe-bench && bench --site frontend execute tutor_core.integration_check.run && cd apps/tutor_core && ../..\/env/bin/python -m unittest discover -s tests -v'
