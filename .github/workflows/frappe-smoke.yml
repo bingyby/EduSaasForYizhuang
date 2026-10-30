@@ -2,7 +2,7 @@ name: Frappe integration smoke test
 on:
   push:
     branches: [Frappe]
-    paths: [".github/workflows/frappe-smoke.yml", "tutor_core/**", "pyproject.toml"]
+    paths: [".github/workflows/frappe-smoke.yml", "tutor_core/**", "tests/**", "pyproject.toml"]
   workflow_dispatch:
 permissions:
   contents: read
