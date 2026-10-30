@@ -66,7 +66,7 @@ def seed_http():
     frappe.set_user('Administrator')
     course = frappe.get_doc({'doctype':'Course','course_name':'HTTP Math'}).insert()
     for i in (1, 2):
-        student = frappe.get_doc({'doctype':'Student','first_name':f'HTTP Student {i}','student_email_id':f'http-student-{i}@example.invalid'}).insert()
+        student = frappe.get_doc({'doctype':'Student','first_name':f'HTTP Student {i}','student_email_id':f'education-student-{i}@example.invalid'}).insert()
         teacher = frappe.get_doc({'doctype':'Instructor','instructor_name':f'HTTP Teacher {i}'}).insert()
         contract = frappe.get_doc({'doctype':'Tutor Contract','student':student.name,'teacher':teacher.name,'course':course.name,'valid_from':'2026-01-01','valid_to':'2027-12-31'}).insert()
         frappe.get_doc({'doctype':'Lesson Session','contract':contract.name,'student':student.name,'teacher':teacher.name,'course':course.name,'starts_at':'2026-11-18 18:00:00','ends_at':'2026-11-18 20:00:00','status':'Scheduled'}).insert()
