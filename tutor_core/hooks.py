@@ -5,3 +5,5 @@ app_description = "Tutoring operations"
 app_email = "admin@example.com"
 app_license = "GPL-3.0-or-later"
 required_apps = ["erpnext", "education"]
+after_install = 'tutor_core.setup.ensure_roles'
+after_migrate = 'tutor_core.setup.ensure_roles'
