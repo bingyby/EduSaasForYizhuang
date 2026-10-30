@@ -1,10 +1,10 @@
 # Tutor Core — Frappe 分支（未完成的原型）
 
-本目录是独立 Frappe App 的初始代码，**尚不是可运行的 SaaS Demo**。当前环境无 Docker、Bench，且终端无法连接 GitHub，因此未能下载依赖、安装 site、迁移 DocType 或验证 UI、权限和数据库。请勿用于真实数据或生产环境。
+本目录是独立 Frappe App 的初始代码，**尚不是可运行的 SaaS Demo**。2026-10-30 已通过 GitHub Actions 临时云端环境验证：启动 ERPNext、安装 Education 与 Tutor Core、迁移 12 个 DocType、HTTP 登录页返回成功。测试环境随后销毁；未验证业务功能、UI、权限或生产部署。请勿用于真实数据或生产环境。
 
 ## 版本与部署方向
 
-Frappe Education 官方兼容矩阵列出 Education `version-16` 与 Frappe `version-16` 兼容。建议选同一大版本的 Framework、ERPNext、Education 稳定版本并锁定具体 tag/commit；尚未完成三者锁定及实测。Education 官方安装流程先安装 ERPNext，再安装 Education。见 https://github.com/frappe/education 和 https://github.com/frappe/frappe_docker 。
+Frappe Education 官方兼容矩阵列出 Education `version-16` 与 Frappe `version-16` 兼容。建议选同一大版本的 Framework、ERPNext、Education 稳定版本并锁定具体 tag/commit；尚未完成三者版本锁定；已在临时 CI 中完成安装冒烟测试。Education 官方安装流程先安装 ERPNext，再安装 Education。见 https://github.com/frappe/education 和 https://github.com/frappe/frappe_docker 。
 
 安装目标（以下为待验证的 Bench 步骤，不是已验证启动命令）：
 
@@ -20,7 +20,7 @@ bench start
 
 ## 代码与模型
 
-`pyproject.toml`、`tutor_core/hooks.py` 为应用入口，`tutor_core/tutor_core/doctype/` 包含 12 个初始 DocType 元数据。`tutor_core/domain.py` 实现纯函数的每周日期生成和按分钟计算金额；`tests/` 是对应的独立 Python 测试。DocType 使用 UUID autoname 的兼容性也尚未在 v16 验证。
+`pyproject.toml`、`tutor_core/hooks.py` 为应用入口，`tutor_core/tutor_core/doctype/` 包含 12 个初始 DocType 元数据。`tutor_core/domain.py` 实现纯函数的每周日期生成和按分钟计算金额；`tests/` 是对应的独立 Python 测试。DocType 定义已在此次 v16 安装中迁移；UUID 生成及业务行为尚未验证。
 
 ```mermaid
 erDiagram
