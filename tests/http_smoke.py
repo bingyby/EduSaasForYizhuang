@@ -30,7 +30,7 @@ r=student.get(BASE+'/api/resource/Lesson%20Session/'+two['lessons'][0]['name'],t
 assert r.status_code in (403,404),r.status_code
 
 # Exercise the same authenticated POST and CSRF mechanism used by the form.
-token = re.search(r'csrf="([^"]+)"',page)
+token = re.search(r'csrf:\s*"([^"]+)"',page)
 assert token, 'Portal did not provide a CSRF token'
 response=teacher.post(BASE+'/api/method/tutor_core.portal.reschedule', data={'lesson':one['lessons'][0]['name'],'starts_at':'2026-11-19 18:00:00','ends_at':'2026-11-19 20:00:00'},headers={'X-Frappe-CSRF-Token':token.group(1)},timeout=30)
 response.raise_for_status()
