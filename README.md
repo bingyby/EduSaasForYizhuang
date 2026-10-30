@@ -38,8 +38,8 @@ Education 的 Student、Instructor、Course、Guardian 和 Fee 应评估复用�
 
 ## 关键未完成工作
 
-- 尚无生成课次的持久化逻辑、冲突检测、调课审计或防重约束；单次修改不得更改周期规则。
-- 尚无完成课程后自动创建账单、费率选择、费率区间重叠校验、事务/并发保障及历史快照不可变约束。计算函数本身不等于账单系统。
+- 已有管理员限定的周期课次生成及防重初版，缺少冲突检测、调课审计和并发压力验证；单次修改不得更改周期规则。
+- 管理员完成课次时可生成费率快照；无匹配或多重匹配费率时拒绝完成。尚缺完整费率区间校验、财务更正流程及并发压力验证。
 - 当前 DocType 仅 System Manager 有权限，教师、学生、监护人和机构级 RBAC 尚未实现或测试。不能上线；不能把客户端过滤当安全边界。需要逐项测试列表、单条读取、REST、附件与写入。
 - 没有教师仪表盘、日历、学生详情、学生门户、演示数据或截图。
 - Outbox DocType 仅为占位，缺少事务内事件写入、版本递增、投递、重试、死信、幂等和消费端去重；没有与知识图谱的连接。事件契约计划包含 lesson.created/updated/completed/cancelled、student.created/updated、lesson_summary.created/updated，带 event_id、event_type、entity_id、entity_version、occurred_at、tenant_id。业务系统保留事实所有权。
@@ -59,4 +59,4 @@ Education 的 Student、Instructor、Course、Guardian 和 Fee 应评估复用�
 python3 -m unittest discover -s tests -v
 ```
 
-以上仅测试纯 Python 计算，不能证明 Frappe 集成、权限或安全正确。
+纯 Python 测试覆盖计算边界；GitHub Actions 还在临时站点测试了课程生成、重复生成、账单快照和重复完成。尚未验证并发、权限隔离和完整生产部署。
