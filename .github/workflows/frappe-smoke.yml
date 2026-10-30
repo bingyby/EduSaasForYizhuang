@@ -1,0 +1,33 @@
+name: Frappe integration smoke test
+on:
+  push:
+    branches: [Frappe]
+    paths: [".github/workflows/frappe-smoke.yml", "tutor_core/**", "pyproject.toml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start official Frappe ERPNext demo
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/frappe/frappe_docker/main/pwd.yml -o /tmp/frappe-pwd.yml
+          docker compose -f /tmp/frappe-pwd.yml up -d
+          docker compose -f /tmp/frappe-pwd.yml wait create-site
+          docker compose -f /tmp/frappe-pwd.yml ps -a
+      - name: Install Education and Tutor Core
+        run: |
+          backend=$(docker compose -f /tmp/frappe-pwd.yml ps -q backend)
+          docker cp "$GITHUB_WORKSPACE/." "$backend:/tmp/tutor-core-source"
+          docker exec "$backend" bash -c 'cd /home/frappe/frappe-bench && bench get-app --branch version-16 https://github.com/frappe/education && cp -R /tmp/tutor-core-source apps/tutor_core && ./env/bin/pip install -e apps/tutor_core && bench --site frontend install-app education && bench --site frontend install-app tutor_core && bench --site frontend list-apps'
+      - name: Probe HTTP
+        run: curl -fsS --retry 12 --retry-delay 5 --retry-all-errors http://localhost:8080/login -o /tmp/login.html
+      - name: Diagnostics
+        if: always()
+        run: docker compose -f /tmp/frappe-pwd.yml logs --tail=100 || true
+      - name: Clean up
+        if: always()
+        run: docker compose -f /tmp/frappe-pwd.yml down -v || true
