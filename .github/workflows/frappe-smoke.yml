@@ -22,7 +22,7 @@ jobs:
         run: |
           backend=$(docker compose -f /tmp/frappe-pwd.yml ps -q backend)
           docker cp "$GITHUB_WORKSPACE/." "$backend:/tmp/tutor-core-source"
-          docker exec "$backend" bash -c 'cd /home/frappe/frappe-bench && bench get-app --branch version-16 https://github.com/frappe/education && cp -R /tmp/tutor-core-source apps/tutor_core && ./env/bin/pip install -e apps/tutor_core && bench --site frontend install-app education && bench --site frontend install-app tutor_core && bench --site frontend list-apps'
+          docker exec "$backend" bash -c 'cd /home/frappe/frappe-bench && bench get-app --branch version-16 https://github.com/frappe/education && cp -R /tmp/tutor-core-source apps/tutor_core && ./env/bin/pip install -e apps/tutor_core && echo tutor_core >> sites/apps.txt && bench --site frontend install-app education && bench --site frontend install-app tutor_core && bench --site frontend list-apps'
       - name: Probe HTTP
         run: curl -fsS --retry 12 --retry-delay 5 --retry-all-errors http://localhost:8080/login -o /tmp/login.html
       - name: Diagnostics
