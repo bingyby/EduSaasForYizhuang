@@ -1,0 +1,59 @@
+{
+  "doctype": "DocType",
+  "name": "Lesson Summary",
+  "module": "Tutor Core",
+  "autoname": "UUID",
+  "track_changes": 1,
+  "field_order": [
+    "lesson",
+    "summary",
+    "external_id",
+    "source_id",
+    "entity_version",
+    "metadata"
+  ],
+  "fields": [
+    {
+      "fieldname": "lesson",
+      "fieldtype": "Link",
+      "label": "Lesson",
+      "options": "Lesson Session",
+      "reqd": 1
+    },
+    {
+      "fieldname": "summary",
+      "fieldtype": "Text Editor",
+      "label": "Summary",
+      "reqd": 1
+    },
+    {
+      "fieldname": "external_id",
+      "fieldtype": "Data",
+      "label": "External Id"
+    },
+    {
+      "fieldname": "source_id",
+      "fieldtype": "Data",
+      "label": "Source Id"
+    },
+    {
+      "fieldname": "entity_version",
+      "fieldtype": "Int",
+      "label": "Entity Version"
+    },
+    {
+      "fieldname": "metadata",
+      "fieldtype": "Long Text",
+      "label": "Metadata"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ]
+}

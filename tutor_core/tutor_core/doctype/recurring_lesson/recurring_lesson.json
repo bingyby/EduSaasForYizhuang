@@ -1,0 +1,87 @@
+{
+  "doctype": "DocType",
+  "name": "Recurring Lesson",
+  "module": "Tutor Core",
+  "autoname": "UUID",
+  "track_changes": 1,
+  "field_order": [
+    "contract",
+    "weekday",
+    "start_date",
+    "end_date",
+    "start_time",
+    "duration_minutes",
+    "external_id",
+    "source_id",
+    "entity_version",
+    "metadata"
+  ],
+  "fields": [
+    {
+      "fieldname": "contract",
+      "fieldtype": "Link",
+      "label": "Contract",
+      "options": "Tutor Contract",
+      "reqd": 1
+    },
+    {
+      "fieldname": "weekday",
+      "fieldtype": "Int",
+      "label": "Weekday",
+      "reqd": 1
+    },
+    {
+      "fieldname": "start_date",
+      "fieldtype": "Date",
+      "label": "Start Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "end_date",
+      "fieldtype": "Date",
+      "label": "End Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "start_time",
+      "fieldtype": "Time",
+      "label": "Start Time",
+      "reqd": 1
+    },
+    {
+      "fieldname": "duration_minutes",
+      "fieldtype": "Int",
+      "label": "Duration Minutes",
+      "reqd": 1
+    },
+    {
+      "fieldname": "external_id",
+      "fieldtype": "Data",
+      "label": "External Id"
+    },
+    {
+      "fieldname": "source_id",
+      "fieldtype": "Data",
+      "label": "Source Id"
+    },
+    {
+      "fieldname": "entity_version",
+      "fieldtype": "Int",
+      "label": "Entity Version"
+    },
+    {
+      "fieldname": "metadata",
+      "fieldtype": "Long Text",
+      "label": "Metadata"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ]
+}

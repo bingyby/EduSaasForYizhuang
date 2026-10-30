@@ -1,0 +1,81 @@
+{
+  "doctype": "DocType",
+  "name": "Tutor Contract",
+  "module": "Tutor Core",
+  "autoname": "UUID",
+  "track_changes": 1,
+  "field_order": [
+    "student",
+    "course",
+    "teacher",
+    "valid_from",
+    "valid_to",
+    "external_id",
+    "source_id",
+    "entity_version",
+    "metadata"
+  ],
+  "fields": [
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1
+    },
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "label": "Course",
+      "options": "Course",
+      "reqd": 1
+    },
+    {
+      "fieldname": "teacher",
+      "fieldtype": "Link",
+      "label": "Teacher",
+      "options": "Instructor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "valid_from",
+      "fieldtype": "Date",
+      "label": "Valid From",
+      "reqd": 1
+    },
+    {
+      "fieldname": "valid_to",
+      "fieldtype": "Date",
+      "label": "Valid To"
+    },
+    {
+      "fieldname": "external_id",
+      "fieldtype": "Data",
+      "label": "External Id"
+    },
+    {
+      "fieldname": "source_id",
+      "fieldtype": "Data",
+      "label": "Source Id"
+    },
+    {
+      "fieldname": "entity_version",
+      "fieldtype": "Int",
+      "label": "Entity Version"
+    },
+    {
+      "fieldname": "metadata",
+      "fieldtype": "Long Text",
+      "label": "Metadata"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ]
+}

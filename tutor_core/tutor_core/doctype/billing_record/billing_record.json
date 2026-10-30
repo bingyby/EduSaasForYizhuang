@@ -1,0 +1,74 @@
+{
+  "doctype": "DocType",
+  "name": "Billing Record",
+  "module": "Tutor Core",
+  "autoname": "UUID",
+  "track_changes": 1,
+  "field_order": [
+    "lesson",
+    "rate_snapshot",
+    "duration_minutes",
+    "amount",
+    "external_id",
+    "source_id",
+    "entity_version",
+    "metadata"
+  ],
+  "fields": [
+    {
+      "fieldname": "lesson",
+      "fieldtype": "Link",
+      "label": "Lesson",
+      "options": "Lesson Session",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "rate_snapshot",
+      "fieldtype": "Currency",
+      "label": "Rate Snapshot",
+      "reqd": 1
+    },
+    {
+      "fieldname": "duration_minutes",
+      "fieldtype": "Int",
+      "label": "Duration Minutes",
+      "reqd": 1
+    },
+    {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "label": "Amount",
+      "reqd": 1
+    },
+    {
+      "fieldname": "external_id",
+      "fieldtype": "Data",
+      "label": "External Id"
+    },
+    {
+      "fieldname": "source_id",
+      "fieldtype": "Data",
+      "label": "Source Id"
+    },
+    {
+      "fieldname": "entity_version",
+      "fieldtype": "Int",
+      "label": "Entity Version"
+    },
+    {
+      "fieldname": "metadata",
+      "fieldtype": "Long Text",
+      "label": "Metadata"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ]
+}

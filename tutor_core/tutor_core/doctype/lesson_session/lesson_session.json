@@ -1,0 +1,111 @@
+{
+  "doctype": "DocType",
+  "name": "Lesson Session",
+  "module": "Tutor Core",
+  "autoname": "UUID",
+  "track_changes": 1,
+  "field_order": [
+    "recurring_lesson",
+    "occurrence_date",
+    "contract",
+    "student",
+    "teacher",
+    "course",
+    "starts_at",
+    "ends_at",
+    "status",
+    "external_id",
+    "source_id",
+    "entity_version",
+    "metadata"
+  ],
+  "fields": [
+    {
+      "fieldname": "recurring_lesson",
+      "fieldtype": "Link",
+      "label": "Recurring Lesson",
+      "options": "Recurring Lesson"
+    },
+    {
+      "fieldname": "occurrence_date",
+      "fieldtype": "Date",
+      "label": "Occurrence Date"
+    },
+    {
+      "fieldname": "contract",
+      "fieldtype": "Link",
+      "label": "Contract",
+      "options": "Tutor Contract",
+      "reqd": 1
+    },
+    {
+      "fieldname": "student",
+      "fieldtype": "Link",
+      "label": "Student",
+      "options": "Student",
+      "reqd": 1
+    },
+    {
+      "fieldname": "teacher",
+      "fieldtype": "Link",
+      "label": "Teacher",
+      "options": "Instructor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "course",
+      "fieldtype": "Link",
+      "label": "Course",
+      "options": "Course",
+      "reqd": 1
+    },
+    {
+      "fieldname": "starts_at",
+      "fieldtype": "Datetime",
+      "label": "Starts At",
+      "reqd": 1
+    },
+    {
+      "fieldname": "ends_at",
+      "fieldtype": "Datetime",
+      "label": "Ends At",
+      "reqd": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Scheduled\nCompleted\nCancelled",
+      "reqd": 1
+    },
+    {
+      "fieldname": "external_id",
+      "fieldtype": "Data",
+      "label": "External Id"
+    },
+    {
+      "fieldname": "source_id",
+      "fieldtype": "Data",
+      "label": "Source Id"
+    },
+    {
+      "fieldname": "entity_version",
+      "fieldtype": "Int",
+      "label": "Entity Version"
+    },
+    {
+      "fieldname": "metadata",
+      "fieldtype": "Long Text",
+      "label": "Metadata"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ]
+}
