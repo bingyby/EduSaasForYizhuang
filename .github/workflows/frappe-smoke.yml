@@ -30,6 +30,11 @@ jobs:
           docker exec "$(docker compose -f /tmp/frappe-pwd.yml ps -q backend)" bash -c 'cd /home/frappe/frappe-bench && bench --site frontend execute tutor_core.integration_check.run && cd apps/tutor_core && ../..\/env/bin/python -m unittest discover -s tests -v'
       - name: Probe HTTP
         run: curl -fsS --retry 12 --retry-delay 5 --retry-all-errors http://localhost:8080/login -o /tmp/login.html
+      - name: Test portal over HTTP
+        run: |
+          docker exec "$(docker compose -f /tmp/frappe-pwd.yml ps -q backend)" bash -c 'cd /home/frappe/frappe-bench && bench --site frontend execute tutor_core.integration_check.seed_http'
+          python3 -m pip install requests
+          python3 tests/http_smoke.py
       - name: Diagnostics
         if: always()
         run: docker compose -f /tmp/frappe-pwd.yml logs --tail=100 || true

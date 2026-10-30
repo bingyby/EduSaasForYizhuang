@@ -59,3 +59,20 @@ def run():
         print('PASS recurrence, billing, scoped portal, denied cross-user access and rescheduling')
     finally:
         frappe.db.rollback()
+
+
+def seed_http():
+    """Seed disposable CI-only accounts and records for HTTP smoke tests."""
+    frappe.set_user('Administrator')
+    course = frappe.get_doc({'doctype':'Course','course_name':'HTTP Math'}).insert()
+    for i in (1, 2):
+        student = frappe.get_doc({'doctype':'Student','first_name':f'HTTP Student {i}','student_email_id':f'http-student-{i}@example.invalid'}).insert()
+        teacher = frappe.get_doc({'doctype':'Instructor','instructor_name':f'HTTP Teacher {i}'}).insert()
+        contract = frappe.get_doc({'doctype':'Tutor Contract','student':student.name,'teacher':teacher.name,'course':course.name,'valid_from':'2026-01-01','valid_to':'2027-12-31'}).insert()
+        frappe.get_doc({'doctype':'Lesson Session','contract':contract.name,'student':student.name,'teacher':teacher.name,'course':course.name,'starts_at':'2026-11-18 18:00:00','ends_at':'2026-11-18 20:00:00','status':'Scheduled'}).insert()
+        for kind, link in [('Teacher',teacher.name), ('Student',student.name)]:
+            email = f'http-{kind.lower()}-{i}@example.invalid'
+            user = frappe.get_doc({'doctype':'User','email':email,'first_name':f'HTTP {kind} {i}','user_type':'Website User','send_welcome_email':0,'new_password':'ci-only-password-123'}).insert()
+            user.add_roles('Tutor '+kind)
+            frappe.get_doc({'doctype':'Tutor Identity','user':user.name,'kind':kind,kind.lower():link}).insert()
+    frappe.db.commit()
