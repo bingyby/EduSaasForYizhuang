@@ -7,6 +7,7 @@
   "field_order": [
     "recurring_lesson",
     "occurrence_date",
+    "occurrence_key",
     "contract",
     "student",
     "teacher",
@@ -30,6 +31,13 @@
       "fieldname": "occurrence_date",
       "fieldtype": "Date",
       "label": "Occurrence Date"
+    },
+    {
+      "fieldname": "occurrence_key",
+      "fieldtype": "Data",
+      "label": "Occurrence Key",
+      "unique": 1,
+      "read_only": 1
     },
     {
       "fieldname": "contract",

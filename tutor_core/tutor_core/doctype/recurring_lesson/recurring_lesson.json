@@ -28,7 +28,7 @@
       "fieldname": "weekday",
       "fieldtype": "Int",
       "label": "Weekday",
-      "reqd": 1
+      "description": "Monday = 0, Sunday = 6"
     },
     {
       "fieldname": "start_date",
