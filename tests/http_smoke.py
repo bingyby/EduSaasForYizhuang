@@ -28,4 +28,11 @@ mine=fetch(student); assert mine['kind']=='Student' and len(mine['lessons'])==1 
 # Check standard REST does not bypass the scoped API.
 r=student.get(BASE+'/api/resource/Lesson%20Session/'+two['lessons'][0]['name'],timeout=30)
 assert r.status_code in (403,404),r.status_code
+
+# Exercise the same authenticated POST and CSRF mechanism used by the form.
+token = re.search(r'csrf="([^"]+)"',page)
+assert token, 'Portal did not provide a CSRF token'
+response=teacher.post(BASE+'/api/method/tutor_core.portal.reschedule', data={'lesson':one['lessons'][0]['name'],'starts_at':'2026-11-19 18:00:00','ends_at':'2026-11-19 20:00:00'},headers={'X-Frappe-CSRF-Token':token.group(1)},timeout=30)
+response.raise_for_status()
+assert fetch(teacher)['lessons'][0]['starts_at'].startswith('2026-11-19')
 print('PASS HTTP teacher/student portal, scoped data and direct REST denial')
