@@ -60,3 +60,8 @@ python3 -m unittest discover -s tests -v
 ```
 
 纯 Python 测试覆盖计算边界；GitHub Actions 还在临时站点测试了课程生成、重复生成、账单快照和重复完成。尚未验证并发、权限隔离和完整生产部署。
+
+
+## 前端与静态预览
+
+`ui-src/` 保存静态预览与 Frappe 门户共用的页面、样式、交互源码。修改后执行 `python3 ui-src/build.py`，生成 `docs/index.html` 和 `tutor_core/www/tutor.html`。GitHub Pages 是虚构数据演示；Frappe 门户读取登录用户的课程接口并支持服务端授权的单次调课。班课、账号切换、学生档案、结算与安排新课等目前仅界面展示或待接入；不要把静态页面当成后端实现。日历导出是当前视图内已加载课程的本地时间快照，不提供同步订阅。
